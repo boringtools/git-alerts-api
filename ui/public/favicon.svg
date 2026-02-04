@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#bgGradient)"/>
+
+  <!-- Shield shape (security symbol) -->
+  <path d="M 50 20 L 35 25 L 35 45 Q 35 65 50 75 Q 65 65 65 45 L 65 25 Z"
+        fill="white"
+        opacity="0.95"/>
+
+  <!-- Alert/Exclamation mark inside shield -->
+  <g fill="#ef4444">
+    <!-- Exclamation line -->
+    <rect x="48" y="35" width="4" height="20" rx="2"/>
+    <!-- Exclamation dot -->
+    <circle cx="50" cy="60" r="2.5"/>
+  </g>
+
+  <!-- Git-like branching lines (subtle) -->
+  <g stroke="white" stroke-width="2" fill="none" opacity="0.3">
+    <circle cx="25" cy="70" r="3"/>
+    <circle cx="40" cy="80" r="3"/>
+    <circle cx="60" cy="80" r="3"/>
+    <circle cx="75" cy="70" r="3"/>
+    <line x1="25" y1="70" x2="40" y2="80"/>
+    <line x1="40" y1="80" x2="60" y2="80"/>
+    <line x1="60" y1="80" x2="75" y2="70"/>
+  </g>
+</svg>
