@@ -13,6 +13,10 @@ GitAlerts provides a complete solution for monitoring GitHub repositories for se
 - **API Access** - RESTful API with interactive documentation
 - **AI Integration** - MCP server for LLM/AI tool integration
 
+## Demo
+
+📺 [GitAlerts Platform Walkthrough](https://youtu.be/9AujWmTx9-w)
+
 ## Project Structure
 
 This project consists of three main components:
