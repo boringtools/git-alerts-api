@@ -25,31 +25,38 @@ This project consists of three main components:
 - **`ui/`** - React frontend application ([UI Documentation](ui/README.md))
 - **`mcp-server/`** - MCP server for AI/LLM integration ([MCP Server Documentation](mcp-server/README.md))
 
-## Quick Start
+## Quick Start (Docker)
 
-1. **Clone the repository:**
+The fastest way to get GitAlerts running. Requires Docker and Docker Compose.
+
 ```bash
 git clone https://github.com/YOUR_USERNAME/git-alerts-api.git
 cd git-alerts-api
+cp .env.example .env
+docker compose up
 ```
 
-2. **Set up the API:**
+Once everything is up:
+
+- UI: http://localhost:5173
+- API: http://localhost:8000
+- API docs: http://localhost:8000/api/docs/
+
+To create an admin user:
+
 ```bash
-cd api
-# See api/README.md for detailed setup instructions
+docker compose exec api python manage.py createsuperuser
 ```
 
-3. **Set up the UI (optional):**
-```bash
-cd ui
-# See ui/README.md for detailed setup instructions
-```
+The MCP server is not part of the compose stack since MCP clients typically launch it themselves. See [`mcp-server/README.md`](mcp-server/README.md) for setup.
 
-4. **Set up the MCP Server (optional):**
-```bash
-cd mcp-server
-# See mcp-server/README.md for detailed setup instructions
-```
+## Manual Setup
+
+If you prefer to run components natively, see each component's README:
+
+- [API setup](api/README.md)
+- [UI setup](ui/README.md)
+- [MCP Server setup](mcp-server/README.md)
 
 ## Documentation
 
