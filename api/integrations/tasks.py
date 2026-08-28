@@ -68,7 +68,7 @@ def validate_github_integration(github_token: str) -> tuple[bool, str]:
             'Accept': 'application/vnd.github.v3+json'
         }
 
-        response = requests.get(url=url, headers=headers)
+        response = requests.get(url=url, headers=headers, timeout=10)
 
         if response.status_code == 200:
             return (True, '')
@@ -93,5 +93,13 @@ def validate_github_integration(github_token: str) -> tuple[bool, str]:
         return (False, f'Validation error: {str(e)}')
 
 def validate_slack_integration(slack_token: str) -> bool:
-    """function to validate Slack integration"""
-    return True
+    """Validates Slack token against the auth.test API"""
+    try:
+        response = requests.post(
+            "https://slack.com/api/auth.test",
+            headers={"Authorization": f"Bearer {slack_token}"},
+            timeout=10,
+        )
+        return response.json().get("ok", False)
+    except Exception:
+        return False

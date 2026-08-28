@@ -11,3 +11,13 @@ class HomeView(APIView):
             "version": "1.0.0",
             "status" : "healthy",
         })
+
+
+from rest_framework.permissions import IsAuthenticated
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+class AuthenticatedSpectacularAPIView(SpectacularAPIView):
+    permission_classes = [IsAuthenticated]
+
+class AuthenticatedSpectacularSwaggerView(SpectacularSwaggerView):
+    permission_classes = [IsAuthenticated]
