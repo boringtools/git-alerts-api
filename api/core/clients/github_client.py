@@ -57,6 +57,7 @@ class GitHubClient:
                 method=method,
                 url=url,
                 headers=self._headers(),
+                timeout=30,
                 **kwargs,
             )
         except requests.RequestException as e:

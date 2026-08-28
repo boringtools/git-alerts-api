@@ -35,7 +35,7 @@ class TruffleHogClient:
                 tf_command.append("--only-verified")
 
             tf_command_output = subprocess.run(
-                tf_command, check=True, timeout=600, capture_output=True, text=True
+                tf_command, check=False, timeout=600, capture_output=True, text=True
             )
 
             for line in tf_command_output.stdout.splitlines():
