@@ -40,7 +40,7 @@ The server provides tools for:
 - **Findings**: List, get details, update, and delete findings
 - **Ignore Rules**: Manage ignored finding types and email domains
 - **Settings**: Get and update system settings
-- **Integrations**: List, create, and validate integrations (GitHub, Slack)
+- **Integrations**: List and validate integrations (GitHub, Slack)
 - **Server**: Health check
 
 ## MCP Client Configuration

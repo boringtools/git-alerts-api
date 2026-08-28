@@ -18,6 +18,7 @@ class GitAlertsAPIClient:
         response = requests.post(
             url=f"{self.base_url}/api/token/",
             json={"username": self.username, "password": self.password},
+            timeout=10,
         )
         response.raise_for_status()
         data = response.json()
@@ -40,6 +41,7 @@ class GitAlertsAPIClient:
             method=method,
             url=f"{self.base_url}{path}",
             headers=headers,
+            timeout=15,
             **kwargs,
         )
         response.raise_for_status()

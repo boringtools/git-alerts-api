@@ -26,7 +26,6 @@ from tools.settings_tools import (
 )
 from tools.integration_tools import (
     list_integrations,
-    create_integration,
     validate_integration
 )
 from tools.server_tools import (
@@ -64,7 +63,6 @@ mcp.tool(update_settings)
 
 # Integration tools
 mcp.tool(list_integrations)
-mcp.tool(create_integration)
 mcp.tool(validate_integration)
 
 # Server tools
