@@ -122,7 +122,14 @@ class GitHubClient:
 
         while url:
             response = self._request("GET", url=url, params=params, **kwargs)
+            
+            if not response.ok:
+                raise GitHubAPIError(f"GitHub API error in pagination: {response.status_code}")
+                
             results.extend(response.json())
+            
+            # The 'next' URL from GitHub already contains all query parameters
+            params = None
 
             links = response.links
             if "next" in links:
@@ -147,7 +154,14 @@ class GitHubClient:
 
         while url:
             response = self._request("GET", url=url, params=params, **kwargs)
+            
+            if not response.ok:
+                raise GitHubAPIError(f"GitHub search API error: {response.status_code}")
+                
             data = response.json()
+            
+            # The 'next' URL from GitHub already contains all query parameters
+            params = None
 
             items = data.get("items", [])
             results.extend(items)
