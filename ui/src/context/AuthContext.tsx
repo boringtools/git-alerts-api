@@ -55,8 +55,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem('access_token', tokens.access);
       localStorage.setItem('refresh_token', tokens.refresh);
 
-      // Store user data
-      const userData: User = { id: 1, username: credentials.username, email: '' };
+      // Decode user data from JWT payload
+      const payload = JSON.parse(atob(tokens.access.split('.')[1]));
+      const userData: User = { id: payload.user_id, username: credentials.username, email: '' };
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
     } catch (error) {
