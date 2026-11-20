@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { findingsApi } from '@/services/api';
 
 export const Findings: React.FC = () => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [selectedFinding, setSelectedFinding] = useState<any>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedFindings, setSelectedFindings] = useState<Set<number>>(new Set());
