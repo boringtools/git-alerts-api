@@ -24,12 +24,12 @@ export const Dashboard: React.FC = () => {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      queued: 'bg-blue-500/10 text-blue-600',
-      in_progress: 'bg-yellow-500/10 text-yellow-600',
-      completed: 'bg-green-500/10 text-green-600',
-      failed: 'bg-red-500/10 text-red-600',
+      queued: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+      in_progress: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
+      completed: 'bg-green-500/10 text-green-600 dark:text-green-400',
+      failed: 'bg-red-500/10 text-red-600 dark:text-red-400',
     };
-    return styles[status as keyof typeof styles] || 'bg-gray-500/10 text-gray-600';
+    return styles[status as keyof typeof styles] || 'bg-muted text-muted-foreground';
   };
 
   const formatScanType = (type: string) => {
@@ -47,19 +47,19 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Dashboard</h1>
         <Link
           to="/scans/new"
-          className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+          className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
         >
           New Scan
         </Link>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-6 bg-card border border-border rounded-lg">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
+        <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
           <h3 className="text-sm font-medium text-muted-foreground">Total Scans</h3>
           <p className="text-3xl font-bold text-foreground mt-2">
             {scansLoading ? '...' : totalScans}
@@ -69,7 +69,7 @@ export const Dashboard: React.FC = () => {
           </Link>
         </div>
 
-        <div className="p-6 bg-card border border-border rounded-lg">
+        <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
           <h3 className="text-sm font-medium text-muted-foreground">Total Findings</h3>
           <p className="text-3xl font-bold text-foreground mt-2">
             {findingsLoading ? '...' : totalFindings}
@@ -79,7 +79,7 @@ export const Dashboard: React.FC = () => {
           </Link>
         </div>
 
-        <div className="p-6 bg-card border border-border rounded-lg">
+        <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
           <h3 className="text-sm font-medium text-muted-foreground">Active Scans</h3>
           <p className="text-3xl font-bold text-foreground mt-2">
             {scansLoading ? '...' : activeScans}

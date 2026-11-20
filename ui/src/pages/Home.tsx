@@ -8,14 +8,14 @@ export const Home: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
       <div className="text-center space-y-6 max-w-3xl">
-        <h1 className="text-5xl font-bold text-primary">GitAlerts</h1>
+        <h1 className="text-4xl font-bold text-primary sm:text-5xl">GitAlerts</h1>
         <p className="text-xl text-muted-foreground">
           Automated security scanning for GitHub repositories
         </p>
         <p className="text-lg text-foreground">
           Detect exposed secrets and sensitive information in your code using TruffleHog
         </p>
-        <div className="flex gap-4 justify-center pt-8">
+        <div className="flex flex-wrap justify-center gap-3 pt-8 sm:gap-4">
           {isAuthenticated ? (
             <>
               <Link

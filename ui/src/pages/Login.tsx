@@ -34,7 +34,7 @@ export const Login: React.FC = () => {
     <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-primary">Sign in to GitAlerts</h2>
+          <h2 className="text-2xl font-bold text-primary sm:text-3xl">Sign in to GitAlerts</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Enter your credentials to access your account
           </p>
@@ -84,7 +84,7 @@ export const Login: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLoading ? 'Signing in...' : 'Sign in'}
           </button>

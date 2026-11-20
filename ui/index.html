@@ -7,6 +7,22 @@
     <meta name="description" content="GitAlerts - Discover and track exposed secrets and security findings in GitHub repositories" />
     <meta name="theme-color" content="#3b82f6" />
     <title>GitAlerts - Security Findings Tracker</title>
+    <script>
+      // Apply the saved theme before first paint so a dark session never flashes white.
+      // Keep this in sync with ui/src/lib/theme.ts (same key, same resolution rules).
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var followsSystem = stored === null || stored === 'system';
+          var dark = stored === 'dark' ||
+            (followsSystem && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {
+          /* storage blocked: fall through to the light palette */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

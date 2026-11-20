@@ -52,15 +52,15 @@ export const Integrations: React.FC = () => {
   return (
     <div className="max-w-4xl space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Integrations</h1>
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Integrations</h1>
         <p className="text-muted-foreground mt-2">
           Connect external services to GitAlerts
         </p>
       </div>
 
       {/* GitHub Integration */}
-      <div className="bg-card border border-border rounded-lg p-6">
-        <div className="flex items-start justify-between mb-4">
+      <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="text-xl font-semibold text-foreground">GitHub</h2>
             <p className="text-sm text-muted-foreground mt-1">
@@ -123,17 +123,17 @@ export const Integrations: React.FC = () => {
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleTestConnection(githubIntegration.id)}
                     disabled={validateIntegrationMutation.isPending}
-                    className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
                   >
                     {validateIntegrationMutation.isPending ? 'Testing...' : 'Test Connection'}
                   </button>
                   <button
                     onClick={() => setIsUpdatingToken(true)}
-                    className="px-4 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-border px-4 py-2 font-medium transition-colors hover:bg-accent"
                   >
                     Update Token
                   </button>
@@ -167,11 +167,11 @@ export const Integrations: React.FC = () => {
                   </div>
                 )}
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     type="submit"
                     disabled={addIntegrationMutation.isPending}
-                    className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
                   >
                     {addIntegrationMutation.isPending ? 'Updating...' : 'Update Token'}
                   </button>
@@ -181,7 +181,7 @@ export const Integrations: React.FC = () => {
                       setIsUpdatingToken(false);
                       setGithubToken('');
                     }}
-                    className="px-4 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-border px-4 py-2 font-medium transition-colors hover:bg-accent"
                   >
                     Cancel
                   </button>
@@ -211,7 +211,7 @@ export const Integrations: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setShowTokenInput(true)}
-                  className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+                  className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
                   Connect GitHub
                 </button>
@@ -243,11 +243,11 @@ export const Integrations: React.FC = () => {
                   </div>
                 )}
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     type="submit"
                     disabled={addIntegrationMutation.isPending}
-                    className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
                   >
                     {addIntegrationMutation.isPending ? 'Connecting...' : 'Connect'}
                   </button>
@@ -257,7 +257,7 @@ export const Integrations: React.FC = () => {
                       setShowTokenInput(false);
                       setGithubToken('');
                     }}
-                    className="px-4 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-border px-4 py-2 font-medium transition-colors hover:bg-accent"
                   >
                     Cancel
                   </button>
@@ -269,8 +269,8 @@ export const Integrations: React.FC = () => {
       </div>
 
       {/* Slack Integration (Placeholder) */}
-      <div className="bg-card border border-border rounded-lg p-6 opacity-50">
-        <div className="flex items-start justify-between mb-4">
+      <div className="bg-card border border-border rounded-lg p-4 sm:p-6 opacity-50">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="text-xl font-semibold text-foreground">Slack</h2>
             <p className="text-sm text-muted-foreground mt-1">

@@ -103,11 +103,11 @@ export const Settings: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+      <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Settings</h1>
 
       <div className="space-y-6">
         {/* System Settings */}
-        <div className="bg-card border border-border rounded-lg p-6">
+        <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
           <h2 className="text-xl font-semibold text-foreground mb-4">System Settings</h2>
 
           {settingsLoading ? (
@@ -166,7 +166,7 @@ export const Settings: React.FC = () => {
                 <button
                   type="submit"
                   disabled={updateSettingsMutation.isPending}
-                  className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
                 >
                   {updateSettingsMutation.isPending ? 'Saving...' : 'Save Settings'}
                 </button>
@@ -182,24 +182,24 @@ export const Settings: React.FC = () => {
         </div>
 
         {/* Ignore Finding Types */}
-        <div className="bg-card border border-border rounded-lg p-6">
+        <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
           <h2 className="text-xl font-semibold text-foreground mb-4">Ignore Finding Types</h2>
           <p className="text-sm text-muted-foreground mb-4">
             Filter out specific detector types (e.g., "Slack", "GitHub")
           </p>
 
-          <form onSubmit={handleAddType} className="flex gap-2 mb-4">
+          <form onSubmit={handleAddType} className="mb-4 flex flex-wrap gap-2">
             <input
               type="text"
               value={newType}
               onChange={(e) => setNewType(e.target.value)}
               placeholder="Enter detector type to ignore"
-              className="flex-1 px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="min-w-0 flex-1 px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
             <button
               type="submit"
               disabled={addTypeMutation.isPending || !newType.trim()}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
             >
               Add
             </button>
@@ -233,24 +233,24 @@ export const Settings: React.FC = () => {
         </div>
 
         {/* Ignore Email Domains */}
-        <div className="bg-card border border-border rounded-lg p-6">
+        <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
           <h2 className="text-xl font-semibold text-foreground mb-4">Ignore Email Domains</h2>
           <p className="text-sm text-muted-foreground mb-4">
             Filter out findings from committers with specific email domains (e.g., github.com, example.org)
           </p>
 
-          <form onSubmit={handleAddDomain} className="flex gap-2 mb-4">
+          <form onSubmit={handleAddDomain} className="mb-4 flex flex-wrap gap-2">
             <input
               type="text"
               value={newDomain}
               onChange={(e) => setNewDomain(e.target.value)}
               placeholder="e.g., github.com"
-              className="flex-1 px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="min-w-0 flex-1 px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
             <button
               type="submit"
               disabled={addDomainMutation.isPending || !newDomain.trim()}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
             >
               Add
             </button>

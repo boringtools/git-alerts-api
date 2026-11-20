@@ -106,12 +106,12 @@ export const Scans: React.FC = () => {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      queued: 'bg-blue-500/10 text-blue-600',
-      in_progress: 'bg-yellow-500/10 text-yellow-600',
-      completed: 'bg-green-500/10 text-green-600',
-      failed: 'bg-red-500/10 text-red-600',
+      queued: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+      in_progress: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
+      completed: 'bg-green-500/10 text-green-600 dark:text-green-400',
+      failed: 'bg-red-500/10 text-red-600 dark:text-red-400',
     };
-    return styles[status as keyof typeof styles] || 'bg-gray-500/10 text-gray-600';
+    return styles[status as keyof typeof styles] || 'bg-muted text-muted-foreground';
   };
 
   const formatScanType = (type: string) => {
@@ -135,34 +135,34 @@ export const Scans: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Scans</h1>
+          <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Scans</h1>
           {selectedScans.size > 0 && (
             <p className="text-sm text-muted-foreground mt-1">
               {selectedScans.size} scan{selectedScans.size > 1 ? 's' : ''} selected
             </p>
           )}
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           {selectedScans.size > 0 && (
             <button
               onClick={handleBulkDelete}
               disabled={bulkDeleteMutation.isPending}
-              className="px-4 py-2 bg-destructive text-destructive-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-destructive px-4 py-2 font-medium text-destructive-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
             >
               {bulkDeleteMutation.isPending ? 'Deleting...' : `Delete Selected (${selectedScans.size})`}
             </button>
           )}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-secondary px-4 py-2 font-medium text-secondary-foreground transition-opacity hover:opacity-90"
           >
             {showFilters ? 'Hide Filters' : 'Show Filters'}
           </button>
           <Link
             to="/scans/new"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             New Scan
           </Link>
@@ -202,7 +202,7 @@ export const Scans: React.FC = () => {
 
       {/* Filter Panel */}
       {showFilters && (
-        <div className="bg-card border border-border rounded-lg p-6">
+        <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
           <h2 className="text-lg font-semibold text-foreground mb-4">Filter Scans</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Type Filter */}
@@ -286,16 +286,16 @@ export const Scans: React.FC = () => {
           </div>
 
           {/* Filter Actions */}
-          <div className="flex gap-3 mt-6">
+          <div className="flex flex-wrap gap-3 mt-6">
             <button
               onClick={handleApplyFilters}
-              className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-6 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Apply Filters
             </button>
             <button
               onClick={handleClearFilters}
-              className="px-6 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-border px-6 py-2 font-medium transition-colors hover:bg-accent"
             >
               Clear All
             </button>

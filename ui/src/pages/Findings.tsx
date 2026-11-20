@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { findingsApi } from '@/services/api';
 
 export const Findings: React.FC = () => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [selectedFinding, setSelectedFinding] = useState<any>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedFindings, setSelectedFindings] = useState<Set<number>>(new Set());
@@ -151,28 +150,28 @@ export const Findings: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Findings</h1>
+          <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Findings</h1>
           {selectedFindings.size > 0 && (
             <p className="text-sm text-muted-foreground mt-1">
               {selectedFindings.size} finding{selectedFindings.size > 1 ? 's' : ''} selected
             </p>
           )}
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           {selectedFindings.size > 0 && (
             <button
               onClick={handleBulkDelete}
               disabled={bulkDeleteMutation.isPending}
-              className="px-4 py-2 bg-destructive text-destructive-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-destructive px-4 py-2 font-medium text-destructive-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
             >
               {bulkDeleteMutation.isPending ? 'Deleting...' : `Delete Selected (${selectedFindings.size})`}
             </button>
           )}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             {showFilters ? 'Hide Filters' : 'Show Filters'}
           </button>
@@ -212,7 +211,7 @@ export const Findings: React.FC = () => {
 
       {/* Filter Panel */}
       {showFilters && (
-        <div className="bg-card border border-border rounded-lg p-6">
+        <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
           <h2 className="text-lg font-semibold text-foreground mb-4">Filter Findings</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Type Filter */}
@@ -319,13 +318,13 @@ export const Findings: React.FC = () => {
           <div className="flex gap-3 mt-6">
             <button
               onClick={handleApplyFilters}
-              className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-6 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Apply Filters
             </button>
             <button
               onClick={handleClearFilters}
-              className="px-6 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-border px-6 py-2 font-medium transition-colors hover:bg-accent"
             >
               Clear All
             </button>
@@ -452,7 +451,7 @@ export const Findings: React.FC = () => {
           {selectedFinding && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
               <div className="bg-card border border-border rounded-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto">
-                <div className="p-6 space-y-4">
+                <div className="p-4 space-y-4 sm:p-6">
                   <div className="flex items-start justify-between">
                     <h2 className="text-2xl font-bold text-foreground">
                       Finding Details
@@ -466,7 +465,7 @@ export const Findings: React.FC = () => {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
                         <h3 className="text-sm font-medium text-muted-foreground">Type</h3>
                         <p className="text-foreground">{selectedFinding.type}</p>
@@ -511,7 +510,7 @@ export const Findings: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
                         <h3 className="text-sm font-medium text-muted-foreground">Email</h3>
                         <p className="text-foreground">{selectedFinding.email || 'N/A'}</p>
@@ -556,7 +555,7 @@ export const Findings: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center pt-4">
+                  <div className="flex flex-col-reverse gap-3 pt-4 sm:flex-row sm:items-center sm:justify-between">
                     <button
                       onClick={() => handleDeleteFinding(selectedFinding.id, selectedFinding.type)}
                       disabled={deleteFindingMutation.isPending}
@@ -564,7 +563,7 @@ export const Findings: React.FC = () => {
                     >
                       {deleteFindingMutation.isPending ? 'Deleting...' : 'Delete Finding'}
                     </button>
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap gap-3">
                       <button
                         onClick={() => handleToggleValidated(selectedFinding)}
                         disabled={updateFindingMutation.isPending}
