@@ -66,7 +66,7 @@ export const NewScan: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Create New Scan</h1>
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Create New Scan</h1>
         <p className="text-muted-foreground mt-2">
           Configure a new security scan for GitHub repositories
         </p>
@@ -74,7 +74,7 @@ export const NewScan: React.FC = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Scan Type Selection */}
-        <div className="bg-card border border-border rounded-lg p-6 space-y-4">
+        <div className="bg-card border border-border rounded-lg p-4 space-y-4 sm:p-6">
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
               Scan Type
@@ -155,7 +155,7 @@ export const NewScan: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate('/scans')}
-            className="px-6 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
+            className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-border px-6 py-2 font-medium transition-colors hover:bg-accent"
           >
             Cancel
           </button>

@@ -85,41 +85,41 @@ export const ScanDetail: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <Link
               to="/scans"
               className="text-muted-foreground hover:text-foreground"
             >
               ← Back
             </Link>
-            <h1 className="text-3xl font-bold text-foreground">Scan Details</h1>
+            <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Scan Details</h1>
           </div>
           <p className="text-sm text-muted-foreground mt-1">Scan #{scan.id}</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Link
             to={`/findings?scan=${scan.id}`}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             View Findings
           </Link>
           <button
             onClick={handleDeleteScan}
             disabled={deleteScanMutation.isPending}
-            className="px-4 py-2 bg-destructive text-destructive-foreground rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg bg-destructive px-4 py-2 font-medium text-destructive-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             {deleteScanMutation.isPending ? 'Deleting...' : 'Delete Scan'}
           </button>
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-lg p-6 space-y-6">
+      <div className="bg-card border border-border rounded-lg p-4 space-y-6 sm:p-6">
         {/* Basic Information */}
         <div>
           <h2 className="text-xl font-semibold text-foreground mb-4">Basic Information</h2>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Scan Type</h3>
               <p className="text-foreground text-lg">{formatScanType(scan.type)}</p>
@@ -146,7 +146,7 @@ export const ScanDetail: React.FC = () => {
         {/* Statistics */}
         <div className="border-t border-border pt-6">
           <h2 className="text-xl font-semibold text-foreground mb-4">Statistics</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
             <div className="bg-muted p-4 rounded-lg">
               <h3 className="text-sm font-medium text-muted-foreground mb-1">Total Repositories</h3>
               <p className="text-3xl font-bold text-foreground">{scan.total_repositories}</p>
@@ -174,7 +174,7 @@ export const ScanDetail: React.FC = () => {
         {/* Timestamps */}
         <div className="border-t border-border pt-6">
           <h2 className="text-xl font-semibold text-foreground mb-4">Timeline</h2>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Created At</h3>
               <p className="text-foreground">{new Date(scan.created_at).toLocaleString()}</p>
