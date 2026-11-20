@@ -4,9 +4,8 @@
       "command": "python",
       "args": ["mcp-server/main.py"],
       "env": {
-        "GITALERTS_API_BASE_URL": "http://localhost:8000",
-        "GITALERTS_USERNAME": "your_username",
-        "GITALERTS_PASSWORD": "your_password"
+        "GITALERTS_API_BASE_URL": "https://gitalerts.example.com",
+        "GITALERTS_REFRESH_TOKEN": "<refresh token from POST /api/token/>"
       }
     }
   }

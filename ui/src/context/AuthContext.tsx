@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { authApi } from '@/services/api';
+import { clearDocsTokenCookie, setDocsTokenCookie } from '@/lib/auth-cookie';
 import type { LoginCredentials, TokenResponse, User } from '@/types';
 
 interface AuthContextType {
@@ -38,12 +39,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         const userData = JSON.parse(storedUser);
         setUser(userData);
+        // Keep the docs cookie in step with the token restored from localStorage.
+        setDocsTokenCookie(token);
       } catch (error) {
         console.error('Failed to parse stored user data:', error);
         // Clear invalid data
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
+        clearDocsTokenCookie();
       }
     }
     setIsLoading(false);
@@ -54,6 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const tokens: TokenResponse = await authApi.login(credentials);
       localStorage.setItem('access_token', tokens.access);
       localStorage.setItem('refresh_token', tokens.refresh);
+      setDocsTokenCookie(tokens.access);
 
       // Decode user data from JWT payload
       const payload = JSON.parse(atob(tokens.access.split('.')[1]));
@@ -70,6 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user');
+    clearDocsTokenCookie();
     setUser(null);
   };
 

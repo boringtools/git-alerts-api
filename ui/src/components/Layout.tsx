@@ -52,6 +52,12 @@ export const Layout: React.FC = () => {
                 >
                   Settings
                 </Link>
+                <Link
+                  to="/help"
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                >
+                  Help
+                </Link>
               </nav>
             </div>
             <div className="flex items-center space-x-4">
