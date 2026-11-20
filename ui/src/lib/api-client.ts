@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { clearDocsTokenCookie, setDocsTokenCookie } from '@/lib/auth-cookie';
 
 // Get API base URL from environment or default to localhost
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
@@ -82,6 +83,7 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
+        clearDocsTokenCookie();
         window.location.href = '/login';
         return Promise.reject(error);
       }
@@ -94,6 +96,7 @@ apiClient.interceptors.response.use(
 
         const { access } = response.data;
         localStorage.setItem('access_token', access);
+        setDocsTokenCookie(access);
 
         // Process queued requests with new token
         processQueue(null, access);
@@ -112,6 +115,7 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
+        clearDocsTokenCookie();
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }

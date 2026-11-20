@@ -42,6 +42,11 @@ Once everything is up:
 - API: http://localhost:8000
 - API docs: http://localhost:8000/api/docs/
 
+Once signed in, the in-app **Help** page (`/help`) links the API reference, the
+architecture doc and every component README, and `/help/mcp` builds an MCP client
+config pointed at the server you are using. The API reference is protected: open it
+from the Help page rather than from this README.
+
 To create an admin user:
 
 ```bash
@@ -64,3 +69,6 @@ If you prefer to run components natively, see each component's README:
 - [UI Documentation](ui/README.md) - Frontend application setup
 - [MCP Server Documentation](mcp-server/README.md) - AI/LLM integration setup
 - [Architecture Documentation](docs/architecture.md) - System architecture overview
+
+The running app serves the same set under `/help`, alongside the interactive API
+reference at `/api/docs/` (requires a signed-in session).

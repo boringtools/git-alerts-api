@@ -13,6 +13,8 @@ import { ScanDetail } from '@/pages/ScanDetail';
 import { Findings } from '@/pages/Findings';
 import { Integrations } from '@/pages/Integrations';
 import { Settings } from '@/pages/Settings';
+import { Help } from '@/pages/Help';
+import { McpSetup } from '@/pages/McpSetup';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -50,6 +52,8 @@ function App() {
               <Route path="/findings" element={<Findings />} />
               <Route path="/integrations" element={<Integrations />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/help/mcp" element={<McpSetup />} />
             </Route>
 
             {/* Catch all */}

@@ -131,6 +131,10 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
 }
 
+# Name of the first-party cookie the SPA mirrors its access token into so that a
+# browser navigation to the protected API docs is authenticated (api/api/auth.py).
+DOCS_AUTH_COOKIE = "gitalerts_docs_token"
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = Config.get_env('TIME_ZONE')
 USE_I18N = True
