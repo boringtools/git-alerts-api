@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export const Layout: React.FC = () => {
   const { user, logout } = useAuth();
@@ -55,6 +56,7 @@ export const Layout: React.FC = () => {
               </nav>
             </div>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               {user && (
                 <>
                   <span className="text-sm text-muted-foreground">{user.username}</span>
