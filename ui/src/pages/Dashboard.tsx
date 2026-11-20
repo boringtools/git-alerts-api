@@ -24,12 +24,12 @@ export const Dashboard: React.FC = () => {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      queued: 'bg-blue-500/10 text-blue-600',
-      in_progress: 'bg-yellow-500/10 text-yellow-600',
-      completed: 'bg-green-500/10 text-green-600',
-      failed: 'bg-red-500/10 text-red-600',
+      queued: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+      in_progress: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
+      completed: 'bg-green-500/10 text-green-600 dark:text-green-400',
+      failed: 'bg-red-500/10 text-red-600 dark:text-red-400',
     };
-    return styles[status as keyof typeof styles] || 'bg-gray-500/10 text-gray-600';
+    return styles[status as keyof typeof styles] || 'bg-muted text-muted-foreground';
   };
 
   const formatScanType = (type: string) => {
