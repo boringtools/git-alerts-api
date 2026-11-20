@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { findingsApi } from '@/services/api';
 
 export const Findings: React.FC = () => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [selectedFinding, setSelectedFinding] = useState<any>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedFindings, setSelectedFindings] = useState<Set<number>>(new Set());
@@ -351,7 +350,7 @@ export const Findings: React.FC = () => {
       ) : (
         <div className="space-y-4">
           <div className="bg-card border border-border rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
+            <div className="hidden overflow-x-auto lg:block">
               <table className="w-full">
                 <thead className="bg-muted">
                   <tr>
@@ -446,6 +445,62 @@ export const Findings: React.FC = () => {
                 </tbody>
               </table>
             </div>
+
+            {/* Below lg the 1300px table cannot fit, so each row becomes a card */}
+            <ul className="divide-y divide-border lg:hidden">
+              {findings.map((finding) => (
+                <li key={finding.id} className="p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <span className="text-sm font-semibold text-foreground">
+                        {finding.type}
+                      </span>
+                      <a
+                        href={finding.repository.startsWith('http') ? finding.repository : `https://github.com/${finding.repository}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 block break-words text-sm text-primary hover:underline"
+                      >
+                        {finding.repository}
+                      </a>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={selectedFindings.has(finding.id)}
+                      onChange={() => handleToggleSelection(finding.id)}
+                      className="mt-1 h-5 w-5 shrink-0 rounded border-input text-primary focus:ring-2 focus:ring-ring cursor-pointer"
+                      title={`Select finding ${finding.id}`}
+                    />
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${getValidatedBadge(
+                        finding.validated
+                      )}`}
+                    >
+                      {finding.validated ? 'VALIDATED' : 'UNVALIDATED'}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {new Date(finding.created_at).toLocaleDateString()} at{' '}
+                    {new Date(finding.created_at).toLocaleTimeString()}
+                  </p>
+
+                  <dl className="mt-3 text-sm">
+                    <dt className="text-xs text-muted-foreground">Email</dt>
+                    <dd className="break-words text-foreground">{finding.email || 'N/A'}</dd>
+                  </dl>
+
+                  <button
+                    onClick={() => setSelectedFinding(finding)}
+                    className="mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:text-primary/80"
+                  >
+                    View Details
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Details Modal */}

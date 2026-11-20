@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enables the `dark:` variant, scoped to the class the theme provider puts on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));

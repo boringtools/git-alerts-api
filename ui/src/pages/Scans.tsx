@@ -106,12 +106,12 @@ export const Scans: React.FC = () => {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      queued: 'bg-blue-500/10 text-blue-600',
-      in_progress: 'bg-yellow-500/10 text-yellow-600',
-      completed: 'bg-green-500/10 text-green-600',
-      failed: 'bg-red-500/10 text-red-600',
+      queued: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+      in_progress: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
+      completed: 'bg-green-500/10 text-green-600 dark:text-green-400',
+      failed: 'bg-red-500/10 text-red-600 dark:text-red-400',
     };
-    return styles[status as keyof typeof styles] || 'bg-gray-500/10 text-gray-600';
+    return styles[status as keyof typeof styles] || 'bg-muted text-muted-foreground';
   };
 
   const formatScanType = (type: string) => {
@@ -326,7 +326,7 @@ export const Scans: React.FC = () => {
         </div>
       ) : (
         <div className="bg-card border border-border rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
+          <div className="hidden overflow-x-auto lg:block">
             <table className="w-full">
               <thead className="bg-muted">
                 <tr>
@@ -429,6 +429,68 @@ export const Scans: React.FC = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Below lg the 1200px table cannot fit, so each row becomes a card */}
+          <ul className="divide-y divide-border lg:hidden">
+            {scans.map((scan) => (
+              <li key={scan.id} className="p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <Link
+                      to={`/scans/${scan.id}`}
+                      className="text-sm font-semibold text-primary hover:underline"
+                    >
+                      {formatScanType(scan.type)}
+                    </Link>
+                    <p className="truncate text-sm text-foreground">{scan.value}</p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={selectedScans.has(scan.id)}
+                    onChange={() => handleToggleSelection(scan.id)}
+                    className="mt-1 h-5 w-5 shrink-0 rounded border-input text-primary focus:ring-2 focus:ring-ring cursor-pointer"
+                    title={`Select scan ${scan.id}`}
+                  />
+                </div>
+
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(
+                      scan.status
+                    )}`}
+                  >
+                    {scan.status.replace('_', ' ').toUpperCase()}
+                  </span>
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {new Date(scan.created_at).toLocaleDateString()} at{' '}
+                  {new Date(scan.created_at).toLocaleTimeString()}
+                </p>
+
+                <dl className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Repositories</dt>
+                    <dd className="text-foreground">
+                      {scan.total_repositories} total / {scan.scanned_repositories} scanned
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Findings</dt>
+                    <dd className="text-foreground">
+                      {scan.total_findings} total / {scan.ignored_findings} ignored
+                    </dd>
+                  </div>
+                </dl>
+
+                <Link
+                  to={`/findings?scan=${scan.id}`}
+                  className="mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:text-primary/80"
+                >
+                  View Findings
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
