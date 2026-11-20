@@ -17,7 +17,7 @@ export const ThemeToggle: React.FC = () => {
       onClick={toggleTheme}
       aria-label={label}
       title={label}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground hover:bg-muted transition-colors"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border text-foreground hover:bg-muted transition-colors md:h-9 md:w-9"
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>
